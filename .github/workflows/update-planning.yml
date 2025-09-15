@@ -1,7 +1,9 @@
 name: Génération automatique du planning
 
 on:
-  workflow_dispatch: # Permet de lancer manuellement le workflow
+  workflow_dispatch: # Ce déclencheur vous permet de lancer l'action manuellement
+  schedule:
+    - cron: '0 1 * * *' # S'exécute chaque jour à 1h du matin UTC
 
 jobs:
   generate:
@@ -26,13 +28,7 @@ jobs:
       - name: Run planning script
         run: python planning_parser.py
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-      - name: Commit and push JSON
-        run: |
-          git add planning.json
-          git commit -m "Mise à jour automatique du planning" || true
-          git push
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Mise à jour automatique du planning"
