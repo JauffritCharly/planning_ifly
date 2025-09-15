@@ -27,5 +27,4 @@ jobs:
       - name: Commit and push JSON
         run: |
           git add planning.json
-          git diff --cached --quiet || git commit -m "Update planning.json"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/JauffritCharly/planning_ifly.git main
