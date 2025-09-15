@@ -34,5 +34,5 @@ jobs:
       - name: Commit and push JSON
         run: |
           git add planning.json
-          git commit -m "Mise à jour automatique du planning"
+          git commit -m "Mise à jour automatique du planning" || true
           git push
