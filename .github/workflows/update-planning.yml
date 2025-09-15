@@ -1,7 +1,7 @@
 name: Génération automatique du planning
 
 on:
-  workflow_dispatch:  # permet de lancer le workflow manuellement
+  workflow_dispatch:  # permet de lancer manuellement
 
 jobs:
   generate:
@@ -26,8 +26,6 @@ jobs:
 
       - name: Commit and push JSON
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add planning.json
           git diff --cached --quiet || git commit -m "Update planning.json"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/JauffritCharly/planning_ifly.git
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/JauffritCharly/planning_ifly.git main
