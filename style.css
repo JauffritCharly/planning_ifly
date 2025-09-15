@@ -1,0 +1,176 @@
+/* Conteneur calendrier */
+#calendar {
+  width: 95%;       /* prend presque toute la largeur de l’écran */
+  max-width: 900px; /* mais pas trop grand sur desktop */
+  margin: 20px auto;;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Créneaux événements */
+.fc-event {
+  background-color: #003366;  /* bleu foncé iFLY */
+  border-color: #003366;
+  color: white;
+  text-align: center;
+  font-size: 0.9rem;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+  margin-right: 4px;
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+
+/* Effet hover sur les créneaux */
+.fc-event:hover {
+  background-color: #0055a0; /* bleu plus vif */
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+/* Étiquettes horaires */
+.fc-timegrid-slot-label {
+  font-weight: bold;
+  color: #333;
+  padding-right: 5px;
+}
+
+/* Effet zebra pour les colonnes des jours avec palette bleu iFLY */
+.fc-timegrid-col {
+  background-color: #ffffff; /* blanc très clair */
+  border-right: 1px solid #0d6ee4; /* ligne verticale */
+}
+.fc-timegrid-col:nth-child(even) {
+  background-color: #e9f4fa !important; /* bleu clair plus soutenu */
+}
+
+/* Supprimer la ligne après le dernier jour */
+.fc-timegrid-col:last-child {
+  border-right: none;
+}
+
+/* Lignes horizontales visibles pour chaque créneau */
+.fc .fc-timegrid-slot {
+  height: 45px; /* plus d'air entre les créneaux */
+  border-bottom: 1px solid #b0c4de; /* ligne horizontale */
+}
+
+/* Titre des jours */
+.fc .fc-col-header-cell-cushion {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #003366; /* bleu foncé iFLY */
+}
+
+/* Surlignage du jour courant */
+.fc-col-header-cell.fc-day-today {
+  background-color: #ffeaa7 !important; /* jaune clair pour header */
+  border-radius: 4px;
+}
+
+.fc-timegrid-col.fc-day-today > .fc-timegrid-col-frame {
+  background-color: #fff7cc; /* jaune très clair sur la colonne */
+}
+
+/* Logo en haut de la page */
+.logo-container {
+  text-align: center;
+}
+
+.logo {
+  max-width: 300px !important;
+  height: auto !important;
+}
+
+/* Général : largeur flexible */
+#calendar {
+  width: 95%;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+/* Créneaux événements */
+.fc-event {
+  font-size: 0.9rem;
+  padding: 6px;
+}
+
+/* Header jours */
+.fc .fc-col-header-cell-cushion {
+  font-size: 1rem;
+}
+
+/* Mobile : < 600px */
+@media (max-width: 600px) {
+  #calendar {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+.logo {
+    max-width: 200px !important; /* force la largeur maximale */
+    height: auto !important;     /* garde les proportions */
+    margin: 10px auto !important; /* espace autour et centré */
+    display: block !important;    /* centre horizontalement */
+  }
+
+  /* Header jours plus petit */
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.7rem;
+    padding: 2px 1px;
+  }
+
+  /* Événements plus petits */
+  .fc-event {
+    font-size: 0.55rem;
+    padding: 3px 2px;
+  }
+
+  .fc-event {
+  margin-top: 3px;
+  margin-right: 2px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
+
+  /* Espacement créneaux réduit */
+  .fc .fc-timegrid-slot {
+    height: 35px;
+  }
+
+  /* Réduire la largeur des colonnes pour gagner de la place */
+  .fc-timegrid-col {
+    padding: 0 2px;
+  }
+
+  /* Texte horaire plus petit */
+  .fc-timegrid-slot-label {
+    font-size: 0.65rem;
+  }
+
+  /* Palette couleur, si nécessaire */
+  .fc-timegrid-col:nth-child(even) {
+    background-color: #f5fafd !important;
+  }
+
+  /* =========================
+     Titre semaine et boutons navigation
+     ========================= */
+  .fc .fc-toolbar-title {
+  font-size: 0.9rem;
+  white-space: normal; 
+}
+
+  .fc .fc-button {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    margin: 1px;
+  }
+
+  .fc .fc-toolbar {
+  flex-wrap: wrap;      
+  justify-content: center;
+  gap: 30px; /* espace entre tous les éléments de la toolbar */
+}
+}
+

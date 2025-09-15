@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning Soufflerie</title>
+
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+
+  <!-- CSS personnalisé -->
+  <link href="style.css" rel="stylesheet">
+
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/fr.js"></script>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="logo.png" alt="Logo iFLY" class="logo">
+  </div>
+  <div class="container mt-5">
+    <div id="calendar"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('planning.json')
+        .then(res => res.json())
+        .then(planning => {
+          const events = [];
+
+          planning.forEach(day => {
+            const [year, month, dayNum] = day.date.split('-').map(Number);
+
+            day.time_slots.forEach(time => {
+              const [hour, minute] = time.split(':').map(Number);
+              const start = new Date(year, month - 1, dayNum, hour, minute);
+              const end = new Date(year, month - 1, dayNum, hour, minute + 30);
+
+              events.push({
+                title: "",
+                start: start,
+                end: end
+              });
+            });
+          });
+
+          const calendarEl = document.getElementById('calendar');
+          const calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'fr',
+            initialView: 'timeGridWeek',
+            allDaySlot: false,
+            slotDuration: '00:30:00',
+            minTime: '10:00:00',
+            maxTime: '23:00:00',
+            scrollTime: '10:00:00',
+            timeZone: 'local',
+            events: events,
+
+            // formatage des heures pour un seul tiret
+            eventTimeFormat: {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false
+            },
+
+            eventContent: function(arg) {
+              const startStr = arg.event.start.toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'});
+              const endStr = arg.event.end.toLocaleTimeString('fr-FR', {hour: '2-digit', minute:'2-digit'});
+              return { html: `${startStr} - ${endStr}` };
+            },
+
+            eventClick: function(info) {
+              window.open('https://www.iflyfrance.com/bons-cadeaux/utiliser-un-bon-ifly/', '_blank');
+            }
+
+          });
+
+          calendar.render();
+        })
+        .catch(err => console.error("Erreur chargement planning.json :", err));
+    });
+  </script>
+</body>
+</html>
