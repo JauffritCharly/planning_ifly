@@ -24,18 +24,10 @@
     <div id="calendar"></div>
   </div>
 
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Ajout d'un paramètre unique à l'URL pour éviter le cache du navigateur
-      const jsonUrl = 'planning.json?cache_buster=' + new Date().getTime();
-
-      fetch(jsonUrl)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error('Erreur de chargement du planning : ' + res.status);
-          }
-          return res.json();
-        })
+      fetch('planning.json')
+        .then(res => res.json())
         .then(planning => {
           const events = [];
 
@@ -66,7 +58,8 @@
             scrollTime: '10:00:00',
             timeZone: 'local',
             events: events,
-            
+
+            // formatage des heures pour un seul tiret
             eventTimeFormat: {
               hour: '2-digit',
               minute: '2-digit',
@@ -82,6 +75,7 @@
             eventClick: function(info) {
               window.open('https://www.iflyfrance.com/bons-cadeaux/utiliser-un-bon-ifly/', '_blank');
             }
+
           });
 
           calendar.render();
