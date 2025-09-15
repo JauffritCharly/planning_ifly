@@ -3,40 +3,33 @@ name: Génération automatique du planning
 on:
   push:
     paths:
-      - "iFP.planning.pdf"
-  workflow_dispatch:
-  schedule:
-    - cron: "0 6 * * *"  # tous les jours à 6h UTC
+      - 'iFP.planning.pdf'
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Récupérer le repo
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Installer Python
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.x'
 
-      # 3️⃣ Installer dépendances
-      - name: Installer dépendances
-        run: pip install pdfplumber
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pdfplumber
 
-      # 4️⃣ Générer planning.json
-      - name: Générer le planning
+      - name: Run planning script
         run: python planning_parser.py
 
-      # 5️⃣ Commit et push si planning.json a changé
-      - name: Commit et Push planning.json
+      - name: Commit and push JSON
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add planning.json
-          # Ne commit que si le fichier a changé
-          git diff-index --quiet HEAD || git commit -m "Mise à jour automatique du planning"
-          git push
+          git diff --cached --quiet || git commit -m "Update planning.json"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/JauffritCharly/planning_ifly.git
