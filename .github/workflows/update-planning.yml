@@ -1,18 +1,20 @@
 name: Génération automatique du planning
 
 on:
-  workflow_dispatch:  # permet de lancer manuellement
+  workflow_dispatch: # Permet de lancer manuellement le workflow
 
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 👈 Ajoutez cette ligne pour les permissions d'écriture
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # 👈 Utilisez la version la plus récente
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # 👈 Utilisez la version la plus récente
         with:
           python-version: '3.x'
 
@@ -24,7 +26,13 @@ jobs:
       - name: Run planning script
         run: python planning_parser.py
 
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
       - name: Commit and push JSON
         run: |
           git add planning.json
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/JauffritCharly/planning_ifly.git main
+          git commit -m "Mise à jour automatique du planning"
+          git push
