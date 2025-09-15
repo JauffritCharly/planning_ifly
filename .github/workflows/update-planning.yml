@@ -1,9 +1,7 @@
 name: Génération automatique du planning
 
 on:
-  push:
-    paths:
-      - 'iFP.planning.pdf'
+  workflow_dispatch:  # permet de lancer le workflow manuellement
 
 jobs:
   generate:
