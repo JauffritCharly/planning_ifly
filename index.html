@@ -16,14 +16,25 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/fr.js"></script>
 </head>
 <body>
-
+<div id="site-header" class="header">
   <div class="logo-container">
     <img src="logo.png" alt="Logo iFLY" class="logo">
   </div>
+
+  <div class="contact-info">
+    <strong>Jauffrit Charly</strong><br>
+    <strong>Email :</strong>
+    <a href="mailto:cjauffrit@iflyworld.com">cjauffrit@ iflyworld.com</a><br>
+    <strong>Tél :</strong>
+    <a href="tel:0643005183">0643005183</a>
+  </div>
+</div>
+
+
   <div class="container mt-5">
     <div id="calendar"></div>
   </div>
-
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       fetch('planning.json')
