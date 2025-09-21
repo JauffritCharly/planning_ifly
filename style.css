@@ -8,7 +8,7 @@
 
 /* Créneaux événements */
 .fc-event {
-  background-color: #003366;  /* bleu foncé iFLY */
+  background-color: #003366; 
   border-color: #003366;
   color: white;
   text-align: center;
@@ -19,6 +19,25 @@
   margin-right: 4px;
   margin-left: 4px;
   margin-bottom: 4px;
+}
+
+/* Style spécifique pour les événements gris (début/fin) */
+.fc-event[style*="background-color: rgb(211, 211, 211)"] {
+    margin: 1px !important;
+    margin-top: 2px !important;
+    margin-right: -1px !important;
+    margin-left: -1px !important;
+    padding: 0 !important;
+    border: none !important;
+    opacity: 0.7 ; /* Ajustez cette valeur pour plus ou moins de transparence */
+}
+
+/* Annule l'effet de survol (hover) sur les cases grises */
+.fc-event[style*="background-color: rgb(211, 211, 211)"]:hover {
+  background-color: #D3D3D3 !important; /* Maintient la couleur grise */
+  cursor: default !important; /* Transforme le curseur en flèche */
+  transform: none !important; /* Annule l'effet de zoom */
+  opacity: 0.7 !important; /* Maintient le niveau de transparence */
 }
 
 /* Effet hover sur les créneaux */
@@ -128,7 +147,6 @@
 #site-header .contact-info a:hover {
   text-decoration: underline !important;
 }
-
 
 /* Mobile : < 600px */
 @media (max-width: 600px) {
@@ -240,8 +258,36 @@
   font-size: 0.8rem;
   white-space: normal; 
 }
-
-
-
 }
+
+
+/* .fc-event.event-debut-journee,
+.fc-event.event-fin-journee {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+
+.start-bar {
+  background-color: #808080; 
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+}
+
+
+.end-bar {
+  background-color: #808080; 
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0;
+} */
+
+
 
