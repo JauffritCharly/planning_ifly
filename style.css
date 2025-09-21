@@ -237,6 +237,28 @@
     max-width: 90px !important;
   }
 
+    /* Style spécifique pour les événements gris (début/fin) */
+  .fc-event[style*="background-color: rgb(211, 211, 211)"] {
+      margin: 1px !important;
+      margin-top: 1px !important;
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+      margin-bottom: 2px !important;
+      padding: 0 !important;
+      border: none !important;
+      opacity: 0.5 ; /* Ajustez cette valeur pour plus ou moins de transparence */
+  }
+
+  /* Annule l'effet de survol (hover) sur les cases grises */
+  .fc-event[style*="background-color: rgb(211, 211, 211)"]:hover,
+  .fc-event[style*="background-color: rgb(211, 211, 211)"]:active,
+  .fc-event[style*="background-color: rgb(211, 211, 211)"]:focus {
+    background-color: #D3D3D3 !important; /* Maintient la couleur grise */
+    opacity: 0.5 !important; /* Maintient le niveau de transparence */
+  }
+
+
+
 }
 
 @media (max-width: 375px) {
@@ -260,34 +282,6 @@
 }
 }
 
-
-/* .fc-event.event-debut-journee,
-.fc-event.event-fin-journee {
-  background-color: transparent !important;
-  border-color: transparent !important;
-}
-
-
-.start-bar {
-  background-color: #808080; 
-  height: 2px;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 0;
-}
-
-
-.end-bar {
-  background-color: #808080; 
-  height: 2px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  border-radius: 0;
-} */
 
 
 
