@@ -7,7 +7,7 @@ import requests
 import sys
 
 # --- Configuration du lien Google Drive et des horaires ---
-PDF_URL = "https://drive.google.com/uc?export=download&id=1w3ehgxdIgHCKrQpFG67qSgyUqqvBddGI"
+PDF_URL = "https://drive.google.com/uc?export=download&id=1nYoSopN7_1f2BbpxD57K2T7NgLYwqWPJ"
 PDF_FILE = "iFP.planning.pdf"
 
 horaires = {
