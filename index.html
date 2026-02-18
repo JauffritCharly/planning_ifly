@@ -16,26 +16,25 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/fr.js"></script>
 </head>
 <body>
-<div id="site-header" class="header">
-  <div class="logo-container">
-    <img src="logo.png" alt="Logo iFLY" class="logo">
-  </div>
+  <div id="site-header" class="header">
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo iFLY" class="logo">
+    </div>
 
-  <div class="contact-info">
-    <strong>Jauffrit Charly</strong><br>
-    <strong>Email :</strong>
-    <a href="mailto:cjauffrit@iflyworld.com">cjauffrit&#64;iflyworld.com</a><br>
-    <strong>Tél :</strong>
-    <a href="tel:0643005183">0643005183</a>
+    <div class="contact-info">
+      <strong>Jauffrit Charly</strong><br>
+      <strong>Email :</strong>
+      <a href="mailto:cjauffrit@iflyworld.com">cjauffrit&#64;iflyworld.com</a><br>
+      <strong>Tél :</strong>
+      <a href="tel:0643005183">0643005183</a>
+    </div>
   </div>
-</div>
-
 
   <div class="container mt-5">
     <div id="calendar"></div>
   </div>
-  
-<script>
+
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
       const jsonUrl = 'planning.json?cache_buster=' + new Date().getTime();
 
@@ -48,27 +47,7 @@
         })
         .then(planning => {
           const events = [];
-          const dailyStartTimes = {};
-          const dailyEndTimes = {};
-          
-          // Première boucle : trouver les heures de début et de fin pour chaque jour
-          planning.forEach(day => {
-            if (day.time_slots && day.time_slots.length > 0) {
-              const date = day.date;
-              const sortedTimes = day.time_slots.sort();
-              const firstTime = sortedTimes[0];
-              const lastTime = sortedTimes[sortedTimes.length - 1];
 
-              if (!dailyStartTimes[date] || firstTime < dailyStartTimes[date]) {
-                dailyStartTimes[date] = firstTime;
-              }
-              if (!dailyEndTimes[date] || lastTime > dailyEndTimes[date]) {
-                dailyEndTimes[date] = lastTime;
-              }
-            }
-          });
-
-          // Deuxième boucle : créer les événements avec le titre et la couleur
           planning.forEach(day => {
             const date = day.date;
             const [year, month, dayNum] = date.split('-').map(Number);
@@ -77,21 +56,16 @@
               const [hour, minute] = time.split(':').map(Number);
               const start = new Date(year, month - 1, dayNum, hour, minute);
               const end = new Date(year, month - 1, dayNum, hour, minute + 30);
-              
+
               const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
               
-              let title = `${timeString} - ${new Date(end).toLocaleTimeString('fr-FR', {
+              const title = `${timeString} - ${new Date(end).toLocaleTimeString('fr-FR', {
                 hour: '2-digit',
                 minute: '2-digit'
               })}`;
-              let backgroundColor = '#003366'; // Couleur par défaut
-              let url = 'https://www.iflyfrance.com/bons-cadeaux/utiliser-un-bon-ifly/';
 
-              if (timeString === dailyStartTimes[date] || timeString === dailyEndTimes[date]) {
-                title = ''; // Pas de texte à l'intérieur
-                backgroundColor = '#808080'; // Gris
-                url = ''; // Rendre l'événement non cliquable
-              }
+              const backgroundColor = '#003366'; // Couleur par défaut
+              const url = 'https://www.iflyfrance.com/bons-cadeaux/utiliser-un-bon-ifly/';
 
               events.push({
                 title: title,
@@ -128,7 +102,7 @@
             eventClick: function(info) {
               if (info.event.url) {
                 window.open(info.event.url, '_blank');
-                info.jsEvent.preventDefault(); // Annule le comportement par défaut
+                info.jsEvent.preventDefault();
               }
             }
           });
@@ -137,108 +111,6 @@
         })
         .catch(err => console.error("Erreur chargement planning.json :", err));
     });
-</script><script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const jsonUrl = 'planning.json?cache_buster=' + new Date().getTime();
-
-      fetch(jsonUrl)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error('Erreur de chargement du planning : ' + res.status);
-          }
-          return res.json();
-        })
-        .then(planning => {
-          const events = [];
-          const dailyStartTimes = {};
-          const dailyEndTimes = {};
-          
-          // Première boucle : trouver les heures de début et de fin pour chaque jour
-          planning.forEach(day => {
-            if (day.time_slots && day.time_slots.length > 0) {
-              const date = day.date;
-              const sortedTimes = day.time_slots.sort();
-              const firstTime = sortedTimes[0];
-              const lastTime = sortedTimes[sortedTimes.length - 1];
-
-              if (!dailyStartTimes[date] || firstTime < dailyStartTimes[date]) {
-                dailyStartTimes[date] = firstTime;
-              }
-              if (!dailyEndTimes[date] || lastTime > dailyEndTimes[date]) {
-                dailyEndTimes[date] = lastTime;
-              }
-            }
-          });
-
-          // Deuxième boucle : créer les événements avec le titre et la couleur
-          planning.forEach(day => {
-            const date = day.date;
-            const [year, month, dayNum] = date.split('-').map(Number);
-            
-            day.time_slots.forEach(time => {
-              const [hour, minute] = time.split(':').map(Number);
-              const start = new Date(year, month - 1, dayNum, hour, minute);
-              const end = new Date(year, month - 1, dayNum, hour, minute + 30);
-              
-              const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-              
-              let title = `${timeString} - ${new Date(end).toLocaleTimeString('fr-FR', {
-                hour: '2-digit',
-                minute: '2-digit'
-              })}`;
-              let backgroundColor = '#003366'; // Couleur par défaut
-              let url = 'https://www.iflyfrance.com/bons-cadeaux/utiliser-un-bon-ifly/';
-
-              if (timeString === dailyStartTimes[date] || timeString === dailyEndTimes[date]) {
-                title = ''; // Pas de texte à l'intérieur
-                backgroundColor = '#D3D3D3'; // Gris
-                url = ''; // Rendre l'événement non cliquable
-              }
-
-              events.push({
-                title: title,
-                start: start,
-                end: end,
-                color: backgroundColor,
-                url: url
-              });
-            });
-          });
-
-          const calendarEl = document.getElementById('calendar');
-          const calendar = new FullCalendar.Calendar(calendarEl, {
-            locale: 'fr',
-            initialView: 'timeGridWeek',
-            allDaySlot: false,
-            slotDuration: '00:30:00',
-            minTime: '10:00:00',
-            maxTime: '23:00:00',
-            scrollTime: '10:00:00',
-            timeZone: 'local',
-            events: events,
-            
-            eventTimeFormat: {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false
-            },
-
-            eventContent: function(arg) {
-              return { html: arg.event.title };
-            },
-
-            eventClick: function(info) {
-              if (info.event.url) {
-                window.open(info.event.url, '_blank');
-                info.jsEvent.preventDefault(); // Annule le comportement par défaut
-              }
-            }
-          });
-
-          calendar.render();
-        })
-        .catch(err => console.error("Erreur chargement planning.json :", err));
-    });
-</script>
+  </script>
 </body>
 </html>
