@@ -34,7 +34,7 @@ horaires = {
 }
 
 mois_map = {"janv": 1, "févr": 2, "mars": 3, "avr": 4, "mai": 5, "juin": 6, "juil": 7, "août": 8, "sept": 9, "oct": 10, "nov": 11, "déc": 12}
-date_re = re.compile(r'(\d{1,2})-(janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)\.')
+date_re = re.compile(r'(\d{1,2})-(janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)\.?')
 
 # --- Fonctions d'extraction de données ---
 def extract_dates_from_page_text(page_text):
