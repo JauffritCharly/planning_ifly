@@ -122,3 +122,33 @@ body {
   border-radius: 6px;
   width: fit-content;
 }
+
+/* Encadré fixe en bas du contenu */
+.bottom-message {
+  position: relative; /* reste dans le flux de la page */
+  margin-top: 30px;   /* espace par rapport au planning */
+  background-color: #e8f4fd;  /* bleu clair type info */
+  color: #0c3c60;              /* texte bleu foncé */
+  border: 1px solid #a7d1f2;   /* contour léger */
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.bottom-message ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.bottom-message li {
+  margin-bottom: 5px;
+}
+
+.bottom-message a {
+  color: #004085;
+  text-decoration: underline;
+}
