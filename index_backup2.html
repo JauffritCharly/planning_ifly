@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning Soufflerie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-top">
+      <img src="logo.png" alt="iFLY" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span class="logo-fallback">iFLY</span>
+      <div class="contact-block">
+        <strong>Jauffrit Charly</strong><br>
+        <a href="mailto:cjauffrit@iflyworld.com">cjauffrit@iflyworld.com</a><br>
+        <a href="tel:0643005183">06 43 00 51 83</a>
+      </div>
+    </div>
+    <div class="week-nav">
+      <button class="week-nav-btn" id="prevWeek" aria-label="Semaine précédente">&#8249;</button>
+      <div class="week-label" id="weekLabel">—</div>
+      <button class="week-nav-btn" id="nextWeek" aria-label="Semaine suivante">&#8250;</button>
+    </div>
+  </div>
+
+  <div class="days-strip" id="daysStrip"></div>
+
+  <div class="content" id="content">
+    <div class="loading">
+      <div class="spinner"></div>
+      Chargement du planning…
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
